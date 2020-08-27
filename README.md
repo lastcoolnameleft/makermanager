@@ -4,15 +4,19 @@
 
 1. Copy Dev App config data to app.php
    1. `cp config/app.dev.php config/app.php`
-2. Start App + DB
+1. Start App + DB
    1. `docker-compose -f docker-compose.dev.yml up`
-3. Perform Database migrations
+1. Perform Database migrations
    1. `docker exec -it makermanager_app_1 bin/cake migrations migrate`
 
 _DEBUGGING_
 
-* To connect to the database: `docker exec -it makermanager_db_1 mysql -u root -pcakephp`
-* To create a shell into the app: `docker exec -it makermanager_app_1 bash`
+* To connect to the database: `docker exec -it db mysql -u root -pcakephp`
+* To create a shell into the app: `docker exec -it app bash`
+* To create FreeIPA
+  * `docker kill freeipa; docker rm freeipa; docker volume rm freeipa`
+  * `docker volume create freeipa`
+  * `docker run --name freeipa -ti -h freeipa.localhost.tv --privileged --security-opt seccomp:unconfined --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /run -v /tmp -v freeipa:/data:Z freeipa/freeipa-server`
 
 ## Configuration
 

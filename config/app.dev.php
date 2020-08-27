@@ -219,7 +219,7 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'makermanager_db_1',
+            'host' => 'db',
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
@@ -339,5 +339,13 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+    ],
+
+    'ActiveDirectory' => [
+        'domain' => 'openldap',
+        'port' => '389', # 389=>ldap, 636=>ldaps
+        'prefix' => 'cn=',
+        'suffix' => ',dc=example,dc=org',
+        'dcString' => 'dc=example,dc=org',
     ],
 ];

@@ -1,6 +1,8 @@
 version: '2'
 services:
     db:
+        container_name: db
+        restart: always
         image: mariadb:5.5
         ports:
             - "3306:3306"
@@ -8,6 +10,8 @@ services:
           MYSQL_ROOT_PASSWORD: 'cakephp'
           MYSQL_DATABASE: 'cakephp'
     app:
+        container_name: app
+        restart: always
         build: .
         volumes:
             - ./logs/cakephp:/www/app/logs
@@ -17,7 +21,7 @@ services:
         links:
             - db
         ports:
-            - "80:80"
+            - "8080:80"
         environment:
           DEBUG: 'true'
           DB_HOST: 'db' # Leave this as 'db' to utilize MySQL container(s)
@@ -34,3 +38,32 @@ services:
           EMAIL_TLS: 'false'
           REPO: 'https://github.com/Dallas-Makerspace/makermanager.git'
           REPO_HOST: 'github.com'
+    openldap:
+        image: osixia/openldap:1.4.0
+        container_name: openldap
+        restart: always
+        volumes:
+        - ./openldap/ldap:/var/lib/ldap
+        - ./openldap/slapd:/etc/ldap/slapd.d
+        ports:
+        - "389:389/tcp"
+        - "636:636/tcp"
+    phpldapadmin:
+        image: osixia/phpldapadmin:0.9.0
+        container_name: phpldapadmin
+        restart: always
+        ports:
+        - "6443:443/tcp"
+        environment:
+            PHPLDAPADMIN_LDAP_HOSTS: openldap
+    ldap-ui:
+        image: dnknth/ldap-ui:latest
+        container_name: ldap-ui
+        restart: always
+        ports:
+        - "5000:5000/tcp"
+        environment:
+            LDAP_URL: ldap://openldap/
+            BASE_DN: dc=example,dc=org
+            BIND_DN: "cn=admin,dc=example,dc=org"
+            BIND_PASSWORD: admin
