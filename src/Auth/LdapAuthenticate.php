@@ -15,16 +15,16 @@ class LdapAuthenticate extends BaseAuthenticate {
 
       // Query active directory for authorized user
       //$ldap = ldap_connect('ldap://' . Configure::read('ActiveDirectory.domain'), 389);
-      $ldap = ldap_connect('ldaps://' . Configure::read('ActiveDirectory.domain'), 636);
-      ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-      ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+      $ldap = \ldap_connect('ldaps://' . Configure::read('ActiveDirectory.domain'), 636);
+      \ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+      \ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
       $ldap_rdn = $username . Configure::read('ActiveDirectory.suffix');
 
-      $bind = @ldap_bind($ldap, $ldap_rdn, $password);
+      $bind = @\ldap_bind($ldap, $ldap_rdn, $password);
       if ($bind) {
         $filter = "(sAMAccountName=$username)";
-        $result = ldap_search($ldap, Configure::read('ActiveDirectory.dcString'), $filter);
-        $data = ldap_get_entries($ldap, $result);
+        $result = \ldap_search($ldap, Configure::read('ActiveDirectory.dcString'), $filter);
+        $data = \ldap_get_entries($ldap, $result);
 
         if ($data['count'] == 1) {
           $auth_user = [

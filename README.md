@@ -1,20 +1,18 @@
-# Maker Manager [![Build Status](https://travis-ci.org/Dallas-Makerspace/makermanager.svg?branch=master)](https://travis-ci.org/Dallas-Makerspace/makermanager) [![License](https://img.shields.io/github/license/Dallas-Makerspace/makermanager.svg?style=flat-square)](https://github.com/Dallas-Makerspace/makermanager/blob/master/LICENCE) [![Coverage Status](https://coveralls.io/repos/github/Dallas-Makerspace/makermanager/badge.svg?branch=master)](https://coveralls.io/github/Dallas-Makerspace/makermanager?branch=master)
-[![Release](https://img.shields.io/github/tag/Dallas-Makerspace/makermanager.svg?style=flat-square)](https://github.com/Dallas-Makerspace/makermanager/tags)
+# Maker Manager
 
-Find a copy of the latest build at [Docker Hub](https://hub.docker.com/r/dallasmakerspace/makermanager/).
+## Setup - Development
 
-## Installation
+1. Copy Dev App config data to app.php
+   1. `cp config/app.dev.php config/app.php`
+2. Start App + DB
+   1. `docker-compose -f docker-compose.dev.yml up`
+3. Perform Database migrations
+   1. `docker exec -it makermanager_app_1 bin/cake migrations migrate`
 
-1. Download [Composer](http://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+_DEBUGGING_
 
-If Composer is installed globally, run
-```bash
-composer create-project --prefer-dist cakephp/app [app_name]
-```
-
-You should now be able to visit the path to where you installed the app and see
-the setup traffic lights.
+* To connect to the database: `docker exec -it makermanager_db_1 mysql -u root -pcakephp`
+* To create a shell into the app: `docker exec -it makermanager_app_1 bash`
 
 ## Configuration
 

@@ -1,7 +1,7 @@
 {
-    "name": "Dallas-Makerspace/makermanager",
+    "name": "dallas-makerspace/makermanager",
     "description": "DMS Membership Management System",
-    "homepage": "http://accounts.dallasmakerspace.org",
+    "homepage": "https://makermanager.thelab.ms",
     "type": "project",
     "license": "MIT",
     "require": {
@@ -13,7 +13,7 @@
         "friendsofcake/bootstrap-ui": "^0.5.0",
         "muffin/footprint": "dev-master",
         "ceeram/cakephp-blame": "~1.0",
-        "syntaxera/cakephp-sparkpost-plugin": "^0.4.5",
+        "dallasmakerspace/cakephp-sparkpost-plugin": "*",
         "php-coveralls/php-coveralls": "~1.0",
         "friendsofcake/cakephp-csvview": "~2.0"
     },

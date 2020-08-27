@@ -288,7 +288,8 @@ class Initial extends AbstractMigration
 
         $table = $this->table('smartwaiver_data');
         $table
-            ->addPrimaryKey([''])
+            #->addPrimaryKey(['waiverId'])
+            # Tommy:  Not sure if this is right, but it gives error when trying to add this key
             ->addColumn('firstName', 'string', [
                 'default' => null,
                 'limit' => 100,
@@ -514,7 +515,7 @@ class Initial extends AbstractMigration
 
         $table = $this->table('vw_UserBadgeNumber');
         $table
-            ->addPrimaryKey([''])
+            ->addPrimaryKey(['UserID'])
             ->addColumn('UserID', 'integer', [
                 'default' => 0,
                 'limit' => 11,
