@@ -7,7 +7,7 @@
 1. Start App + DB
    1. `docker-compose -f docker-compose.dev.yml up`
 1. Perform Database migrations
-   1. `docker exec -it makermanager_app_1 bin/cake migrations migrate`
+   1. `docker exec -it app bin/cake migrations migrate`
 
 _DEBUGGING_
 
